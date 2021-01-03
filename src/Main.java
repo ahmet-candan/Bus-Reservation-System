@@ -12,6 +12,7 @@ public class Main {
             public void run() {
 
                 AnaEkran ae=new AnaEkran();
+                ae.setLocationRelativeTo(null);
                 ae.setVisible(true);
 
             }

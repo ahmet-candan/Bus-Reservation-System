@@ -14,7 +14,7 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <background color="-14725765"/>
+          <background color="-13017996"/>
         </properties>
         <border type="none"/>
         <children>
@@ -35,7 +35,7 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <icon value="Images/bus (1).png"/>
+              <icon value="bus (1).png"/>
               <text value=""/>
               <verticalAlignment value="0"/>
             </properties>
@@ -75,7 +75,7 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <icon value="Images/login (2).png"/>
+              <icon value="login (2).png"/>
               <text value=""/>
             </properties>
           </component>
@@ -84,7 +84,7 @@
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <icon value="Images/login (2).png"/>
+              <icon value="login (2).png"/>
               <text value=""/>
             </properties>
           </component>

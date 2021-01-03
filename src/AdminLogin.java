@@ -3,39 +3,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-public class AnaEkran extends JFrame {
-    private JPanel panel;
-    private JButton adminGirişiButton;
-    private JButton kullanıcıGirişiButton;
+public class AdminLogin extends JFrame{
+    private JPanel panel2;
+    private JButton girişYapButton;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JButton userButton;
+    //URL url = getClass().getResource("C:\\Users\\Lenovo\\Desktop\\Bus Reservation\\src\\Images");
 
+    public AdminLogin() {
 
-    public AnaEkran() {
-        URL url = getClass().getResource("C:\\Users\\Lenovo\\Desktop\\Bus Reservation\\src\\Images");
-        add(panel);
+        add(panel2);
         setSize(800,500);
         setTitle("Otobüs Bilet Sistemi");
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        adminGirişiButton.addActionListener(new ActionListener() {
+        girişYapButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                AdminLogin al = new AdminLogin();
-                al.setLocationRelativeTo(null);
-                al.setVisible(true);
 
             }
         });
-        kullanıcıGirişiButton.addActionListener(new ActionListener() {
+        userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 UserLogin ul = new UserLogin();
                 ul.setLocationRelativeTo(null);
                 ul.setVisible(true);
-
-
             }
         });
     }
