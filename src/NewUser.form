@@ -29,7 +29,7 @@
               <text value="İsim"/>
             </properties>
           </component>
-          <component id="589c5" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="589c5" class="javax.swing.JTextField" binding="isimField">
             <constraints>
               <grid row="4" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -48,7 +48,7 @@
               <text value="Username"/>
             </properties>
           </component>
-          <component id="f877d" class="javax.swing.JTextField" default-binding="true">
+          <component id="f877d" class="javax.swing.JTextField" binding="usernameField">
             <constraints>
               <grid row="6" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -56,7 +56,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="2fe75" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+          <component id="2fe75" class="javax.swing.JTextField" binding="parolaField">
             <constraints>
               <grid row="7" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -75,7 +75,7 @@
               <text value="Soyisim"/>
             </properties>
           </component>
-          <component id="e2b57" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+          <component id="e2b57" class="javax.swing.JTextField" binding="soyisimField">
             <constraints>
               <grid row="5" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -83,7 +83,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="f7a34" class="javax.swing.JTextField" default-binding="true">
+          <component id="f7a34" class="javax.swing.JTextField" binding="emailField">
             <constraints>
               <grid row="8" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -137,7 +137,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="1ace6" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <component id="1ace6" class="javax.swing.JButton" binding="kayıt">
             <constraints>
               <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
