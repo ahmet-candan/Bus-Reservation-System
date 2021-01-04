@@ -72,11 +72,12 @@ public class NewUser extends  JFrame{
     }
     private void setPreparedStatement(String isim,String soyisim,String username,String parola,String email) throws SQLException {
 
-        String kontrolSorgu = "SELECT COUNT(*) FROM kullanici_bilgileri WHERE username= ? and parola = ? ";
+        String kontrolSorgu = "SELECT * FROM kullanici_bilgileri WHERE username= ? and parola = ? ";
         preparedStatement = con.prepareStatement(kontrolSorgu);
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, parola);
         ResultSet rs = preparedStatement.executeQuery();
+        System.out.println(rs);
 
         if (rs.next()) {
             bilgiMesaji("Bu kullanıcı zaten bulunuyor ", "Bilgi");
