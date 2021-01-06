@@ -36,21 +36,29 @@ public class UserLogin extends JFrame{
 
                     con = DriverManager.getConnection(url,"root","");
                     String sorgu = "Select username,parola from kullanici_bilgileri where `username` = ? and `parola` = ?";
-                    preparedStatement = con.prepareStatement(sorgu);
+
+                    try {
+                        preparedStatement = con.prepareStatement(sorgu);
+                    }
+                    catch (Exception ex){
+                        System.out.println(ex+"hata ");
+                    }
                     preparedStatement.setString(1,username);
                     preparedStatement.setString(2,parola);
+
                     ResultSet rs = preparedStatement.executeQuery();
 
                     while (rs.next()){
+                        System.out.println("hataaa1 ");
                          userid = rs.getString("username");
+                        System.out.println("hataaa2 ");
                          passid = rs.getString("parola");
-                        System.out.println(userid);
-
+                         System.out.println(userid);
                     }
 
                     if (userid.equals(username)&&passid.equals(parola)){
-                        System.out.println("buraya geldim");
-                        bilgiMesajı("Hoşgeldin "+userid+" !", "Bilgi Mesajı");
+                        System.out.println("ifin işçine girdim");
+                        bilgiMesajı("Hoşgeldin "+userid+"","Bilgi Mesajı");
                         dispose();
                         UserControlPanel ucp = new UserControlPanel();
                         ucp.setLocationRelativeTo(null);
@@ -58,16 +66,19 @@ public class UserLogin extends JFrame{
 
                     }
 
+                        // çalışmıyor
                     else{
                         System.out.println("buraya geldim ELSE");
                         bilgiMesajı("Giriş bilgileri yanlış yeni bir hesap açabilirsin","Bilgi Mesajı");
                     }
                     System.out.println("buraya geldim else dışı");
                 } catch (SQLException throwables) {
+                    System.out.println("hata mq");
                     throwables.printStackTrace();
+
                 }
 
-
+                System.out.println("catchden çıktım");
             }
         });
 
@@ -88,9 +99,6 @@ public class UserLogin extends JFrame{
                 NewUser nu = new NewUser();
                 nu.setLocationRelativeTo(null);
                 nu.setVisible(true);
-
-
-
             }
         });
     }

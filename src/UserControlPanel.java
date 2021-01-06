@@ -8,6 +8,7 @@ import java.sql.SQLException;
 public class UserControlPanel extends JFrame {
     private JPanel panel5;
     private JButton musteri_ekle;
+    private JButton seferAlButton;
 
 
     public UserControlPanel() {

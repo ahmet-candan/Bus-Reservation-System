@@ -10,7 +10,7 @@ public class AnaEkran extends JFrame {
 
 
     public AnaEkran() {
-        URL url = getClass().getResource("C:\\Users\\Lenovo\\Desktop\\Bus Reservation\\src\\Images");
+
         add(panel);
         setSize(800,500);
         setTitle("Otobüs Bilet Sistemi");
@@ -34,8 +34,6 @@ public class AnaEkran extends JFrame {
                 UserLogin ul = new UserLogin();
                 ul.setLocationRelativeTo(null);
                 ul.setVisible(true);
-
-
             }
         });
     }

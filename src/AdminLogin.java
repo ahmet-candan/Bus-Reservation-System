@@ -25,6 +25,8 @@ public class AdminLogin extends JFrame{
 
             }
         });
+
+
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -32,6 +34,12 @@ public class AdminLogin extends JFrame{
                 UserLogin ul = new UserLogin();
                 ul.setLocationRelativeTo(null);
                 ul.setVisible(true);
+            }
+        });
+        girişYapButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

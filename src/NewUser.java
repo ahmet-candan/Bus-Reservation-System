@@ -97,10 +97,13 @@ public class NewUser extends  JFrame{
         if (x == 1) {
             bilgiMesaji("Kaydınız Yapıldı", "Bilgilerndirme");
         }
+
+        else {
+            bilgiMesaji("Kayıt başarısız","Bilgilendirme ");
+        }
     }
 
     }
-
     public void bilgiMesaji(String mesaj,String baslik){
         JOptionPane.showMessageDialog(null,mesaj,baslik,JOptionPane.INFORMATION_MESSAGE);
     }
