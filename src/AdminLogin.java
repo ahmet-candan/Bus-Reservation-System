@@ -2,14 +2,17 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.sql.*;
 
 public class AdminLogin extends JFrame{
     private JPanel panel2;
     private JButton girişYapButton;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField admin_username;
+    private JTextField admin_parola;
     private JButton userButton;
-    //URL url = getClass().getResource("C:\\Users\\Lenovo\\Desktop\\Bus Reservation\\src\\Images");
+    private JButton kayıtOlButton;
+    private Connection con = null;
+    private PreparedStatement preparedStatement = null;
 
     public AdminLogin() {
 
@@ -40,7 +43,65 @@ public class AdminLogin extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                String username = admin_username.getText();
+                String parola = admin_parola.getText();
+
+                String url = "jdbc:mysql://localhost:3306/bus";
+
+
+                try {
+                    String userid = "null";
+                    String passid = "null";
+
+                    con = DriverManager.getConnection(url,"root","");
+                    String sorgu = "Select username,parola from admin_login where `username` = ? and `parola` = ?";
+
+                    try {
+                        preparedStatement = con.prepareStatement(sorgu);
+                    }
+                    catch (Exception ex){
+                        System.out.println(ex+"hata ");
+                    }
+                    preparedStatement.setString(1,username);
+                    preparedStatement.setString(2,parola);
+
+                    ResultSet rs = preparedStatement.executeQuery();
+
+                    while (rs.next()){
+                        System.out.println("hataaa1 ");
+                        userid = rs.getString("username");
+                        System.out.println("hataaa2 ");
+                        passid = rs.getString("parola");
+                        System.out.println(userid);
+                    }
+
+                    if (userid.equals(username)&&passid.equals(parola)){
+                        System.out.println("ifin işçine girdim");
+                        bilgiMesajı("Hoşgeldin "+userid+"","Bilgi Mesajı");
+                        dispose();
+                        AdmibnControlPanel acp = new AdmibnControlPanel();
+                        acp.setLocationRelativeTo(null);
+                        acp.setVisible(true);
+
+                    }
+
+                    // çalışmıyor
+                    else{
+                        System.out.println("buraya geldim ELSE");
+                        bilgiMesajı("Giriş bilgileri yanlış yeni bir hesap açabilirsin","Bilgi Mesajı");
+                    }
+                    System.out.println("buraya geldim else dışı");
+                } catch (SQLException throwables) {
+                    System.out.println("hata mq");
+                    throwables.printStackTrace();
+
+                }
+
             }
         });
+
+    }
+    public void bilgiMesajı(String message, String tittle) {
+        JOptionPane.showMessageDialog(null, message, tittle, JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class UserLogin extends JFrame{
+
     private JPanel panel1;
     private JTextField user_login;
     private JTextField pass;
@@ -14,6 +15,7 @@ public class UserLogin extends JFrame{
     private Connection con = null;
     private PreparedStatement preparedStatement = null;
 
+
     public UserLogin() {
         add(panel1);
         setSize(800,500);
@@ -21,66 +23,66 @@ public class UserLogin extends JFrame{
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        girişYapButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    girişYapButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            try {
                 String username = user_login.getText();
                 String parola = pass.getText();
 
                 String url = "jdbc:mysql://localhost:3306/bus";
+                String userid = "null";
+                String passid = "null";
 
+                con = DriverManager.getConnection(url, "root", "");
+                String sorgu = "Select username,parola from kullanici_bilgileri where `username` = ? and `parola` = ?";
 
                 try {
-                    String userid = null;
-                    String passid = null;
+                    preparedStatement = con.prepareStatement(sorgu);
+                } catch (Exception ex) {
+                    System.out.println(ex + "hata ");
+                }
+                preparedStatement.setString(1, username);
+                preparedStatement.setString(2, parola);
 
-                    con = DriverManager.getConnection(url,"root","");
-                    String sorgu = "Select username,parola from kullanici_bilgileri where `username` = ? and `parola` = ?";
+                ResultSet rs = preparedStatement.executeQuery();
 
-                    try {
-                        preparedStatement = con.prepareStatement(sorgu);
-                    }
-                    catch (Exception ex){
-                        System.out.println(ex+"hata ");
-                    }
-                    preparedStatement.setString(1,username);
-                    preparedStatement.setString(2,parola);
+                while (rs.next()) {
+                    System.out.println("hataaa1 ");
+                    userid = rs.getString("username");
+                    System.out.println("hataaa2 ");
+                    passid = rs.getString("parola");
+                    System.out.println(userid);
+                }
 
-                    ResultSet rs = preparedStatement.executeQuery();
-
-                    while (rs.next()){
-                        System.out.println("hataaa1 ");
-                         userid = rs.getString("username");
-                        System.out.println("hataaa2 ");
-                         passid = rs.getString("parola");
-                         System.out.println(userid);
-                    }
-
-                    if (userid.equals(username)&&passid.equals(parola)){
-                        System.out.println("ifin işçine girdim");
-                        bilgiMesajı("Hoşgeldin "+userid+"","Bilgi Mesajı");
-                        dispose();
-                        UserControlPanel ucp = new UserControlPanel();
-                        ucp.setLocationRelativeTo(null);
-                        ucp.setVisible(true);
-
-                    }
-
-                        // çalışmıyor
-                    else{
-                        System.out.println("buraya geldim ELSE");
-                        bilgiMesajı("Giriş bilgileri yanlış yeni bir hesap açabilirsin","Bilgi Mesajı");
-                    }
-                    System.out.println("buraya geldim else dışı");
-                } catch (SQLException throwables) {
-                    System.out.println("hata mq");
-                    throwables.printStackTrace();
+                if (userid.equals(username) && passid.equals(parola)) {
+                    System.out.println("ifin işçine girdim");
+                    bilgiMesajı("Hoşgeldin " + userid + "", "Bilgi Mesajı");
+                    dispose();
+                    UserControlPanel ucp = new UserControlPanel();
+                    ucp.setLocationRelativeTo(null);
+                    ucp.setVisible(true);
 
                 }
 
-                System.out.println("catchden çıktım");
+                // çalışmıyor
+                else {
+                    System.out.println("buraya geldim ELSE");
+                    bilgiMesajı("Giriş bilgileri yanlış yeni bir hesap açabilirsin", "Bilgi Mesajı");
+                }
+                System.out.println("buraya geldim else dışı");
+            } catch (SQLException throwables) {
+                System.out.println("hata mq");
+                throwables.printStackTrace();
+
             }
-        });
+
+            System.out.println("catchden çıktım");
+        }
+    });
+
+
 
         adminButton.addActionListener(new ActionListener() {
             @Override
@@ -106,3 +108,6 @@ public class UserLogin extends JFrame{
         JOptionPane.showMessageDialog(null, message, tittle, JOptionPane.INFORMATION_MESSAGE);
     }
 }
+
+
+
