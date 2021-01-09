@@ -1,7 +1,6 @@
-import jdk.internal.icu.text.UnicodeSet;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
+
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.demo.TestDateEvaluator;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,20 +13,19 @@ public class YeniSeferEkle extends JFrame{
     private JTextField varis_noktasi;
     private JTextField otobus_no;
     private JTextField textField1;
+    private JTextField textField2;
+    private JPanel tarihpaneli;
+
+
+    JDateChooser tarih = new JDateChooser();
 
     public YeniSeferEkle() {
+
+        tarihpaneli.add(tarih);
 
         add(panel7);
         setSize(800,500);
         setTitle("Otobüs Bilet Sistemi");
-
-        UtilDateModel model = new UtilDateModel();
-        JDatePanelImpl datePanel = new JDatePanelImpl(model);
-        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
-
-
-        panel7.add(datePicker);
-
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         button1.addActionListener(new ActionListener() {
