@@ -28,19 +28,13 @@ public class AdmibnControlPanel extends JFrame{
 
             }
         });
-        yeniSeferEkle.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
 
         seferiDüzenleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
+                SeferDuzenle sd = new SeferDuzenle();
+                sd.setLocationRelativeTo(null);
+                sd.setVisible(true);
             }
         });
     }
