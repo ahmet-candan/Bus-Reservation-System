@@ -86,7 +86,12 @@ public class SeferDuzenle extends JFrame{
                         f.setText(sefersaati);
                         g.setText(fiyat);
 
+                        String duzenleme_sorgusu = "UPDATE terminal SET otobus_no = ?, otobus_adi=?, otobus_no = ?,kalkis_noktasi = ?, varis_noktasi = ?,sefer_tarihi = ?, sefer_saati = ?,ucret = ?";
 
+                    }
+
+                    else{
+                        bilgiMesaji("Böyle bir kayıt bulunamadı","Uyarı");
                     }
 
                 } catch (SQLException throwables) {
@@ -96,5 +101,8 @@ public class SeferDuzenle extends JFrame{
 
             }
         });
+    }
+    public void bilgiMesaji(String mesaj,String baslik){
+        JOptionPane.showMessageDialog(null,mesaj,baslik,JOptionPane.INFORMATION_MESSAGE);
     }
 }
