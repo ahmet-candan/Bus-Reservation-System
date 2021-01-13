@@ -68,15 +68,15 @@ public class AdminLogin extends JFrame{
                     ResultSet rs = preparedStatement.executeQuery();
 
                     while (rs.next()){
-                        System.out.println("hataaa1 ");
+
                         userid = rs.getString("username");
-                        System.out.println("hataaa2 ");
+
                         passid = rs.getString("parola");
                         System.out.println(userid);
                     }
 
                     if (userid.equals(username)&&passid.equals(parola)){
-                        System.out.println("ifin işçine girdim");
+
                         bilgiMesajı("Hoşgeldin "+userid+"","Bilgi Mesajı");
                         dispose();
                         AdmibnControlPanel acp = new AdmibnControlPanel();
@@ -87,12 +87,12 @@ public class AdminLogin extends JFrame{
 
                     // çalışmıyor
                     else{
-                        System.out.println("buraya geldim ELSE");
+
                         bilgiMesajı("Giriş bilgileri yanlış yeni bir hesap açabilirsin","Bilgi Mesajı");
                     }
-                    System.out.println("buraya geldim else dışı");
+
                 } catch (SQLException throwables) {
-                    System.out.println("hata mq");
+
                     throwables.printStackTrace();
 
                 }

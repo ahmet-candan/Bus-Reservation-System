@@ -60,7 +60,9 @@ public class UserLogin extends JFrame{
                     System.out.println("ifin işçine girdim");
                     bilgiMesajı("Hoşgeldin " + userid + "", "Bilgi Mesajı");
                     dispose();
+
                     UserControlPanel ucp = new UserControlPanel();
+                    System.out.println(" buraya gelemedim");
                     ucp.setLocationRelativeTo(null);
                     ucp.setVisible(true);
 
@@ -81,8 +83,6 @@ public class UserLogin extends JFrame{
             System.out.println("catchden çıktım");
         }
     });
-
-
 
         adminButton.addActionListener(new ActionListener() {
             @Override

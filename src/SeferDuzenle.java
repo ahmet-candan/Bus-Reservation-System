@@ -48,16 +48,13 @@ public class SeferDuzenle extends JFrame{
         otobüsüBulButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 String otobus_no = otobusNo.getText();
-
-                /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String ds = sdf.format(tarih.getDate());*/
-
-
                 String databaseUrl = "jdbc:mysql://localhost:3306/bus?useUnicode=true&characterEncoding=utf-8";
 
                 try {
                     con = DriverManager.getConnection(databaseUrl,"root","");
+
                     String otobus_sorgu = "SELECT otobus_no FROM terminal WHERE otobus_no = ?";
                     preparedStatement  = con.prepareStatement(otobus_sorgu);
                     preparedStatement.setString(1,otobus_no);
@@ -66,9 +63,11 @@ public class SeferDuzenle extends JFrame{
 
                     if (rs.next()){
 
-                        String sorgu = "SELECT * FROM terminal";
-                        statement = con.createStatement();
-                        ResultSet ss = statement.executeQuery(sorgu);
+                        String sorgu = "SELECT * FROM terminal where otobus_no = ?";
+                        preparedStatement = con.prepareStatement(sorgu);
+                        preparedStatement.setString(1,otobus_no);
+                        ResultSet ss = preparedStatement.executeQuery();
+
                         while (ss.next()){
                              otobusno = ss.getString("otobus_no");
                              otobusadi = ss.getString("otobus_adi");
@@ -86,8 +85,6 @@ public class SeferDuzenle extends JFrame{
                         f.setText(sefersaati);
                         g.setText(fiyat);
 
-                        String duzenleme_sorgusu = "UPDATE terminal SET otobus_no = ?, otobus_adi=?, otobus_no = ?,kalkis_noktasi = ?, varis_noktasi = ?,sefer_tarihi = ?, sefer_saati = ?,ucret = ?";
-
                     }
 
                     else{
@@ -96,6 +93,55 @@ public class SeferDuzenle extends JFrame{
 
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
+                }
+
+            }
+        });
+
+
+        kayit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String databaseUrl = "jdbc:mysql://localhost:3306/bus?useUnicode=true&characterEncoding=utf-8";
+                try {
+
+                    con = DriverManager.getConnection(databaseUrl,"root","");
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    String ds = sdf.format(tarih.getDate());
+
+                    String otobusNo = a.getText();
+                    String otobusAdi = b.getText();
+                    String kalkisNoktasi = c.getText();
+                    String varisNoktasi = d.getText();
+                    String seferSaati = f.getText();
+                    String fiyat = g.getText();
+
+                    String duzenleme_sorgusu = "UPDATE terminal SET otobus_no = ?, otobus_adi=?,kalkis_noktasi = ?, varis_noktasi = ?,sefer_tarihi = ?, sefer_saati = ?,ucret = ? WHERE otobus_no = ?";
+                    preparedStatement  = con.prepareStatement(duzenleme_sorgusu);
+                    preparedStatement.setString(1,otobusNo);
+                    preparedStatement.setString(2,otobusAdi);
+                    preparedStatement.setString(3,kalkisNoktasi);
+                    preparedStatement.setString(4,varisNoktasi);
+                    preparedStatement.setString(5, ds);
+                    preparedStatement.setString(6,seferSaati);
+                    preparedStatement.setString(7,fiyat);
+                    preparedStatement.setString(8,otobusNo);
+
+                    int x = preparedStatement.executeUpdate();
+
+                    if (x==1){
+                        bilgiMesaji("Düzenleme işlemi tamamlandı","Bilgi" );
+                    }
+
+                    else {
+                        bilgiMesaji("Hata işlem yaptınız","Hata");
+                    }
+
+
+                } catch (Exception ex) {
+                   bilgiMesaji("Eksik bilgi girdiniz","Hata");
                 }
 
 

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 
+
 public class YeniSeferEkle extends JFrame{
     private JButton kayit;
     private JPanel panel7;
@@ -75,6 +76,8 @@ public class YeniSeferEkle extends JFrame{
 
                     if (x == 1) {
                         bilgiMesaji("Kaydınız Yapıldı", "Bilgilerndirme");
+
+
                     } else {
                         bilgiMesaji("Kayıt başarısız", "Bilgilendirme ");
                     }
