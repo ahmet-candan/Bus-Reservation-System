@@ -11,6 +11,7 @@ public class satinAl extends JFrame{
     private Connection con = null;
     private PreparedStatement preparedStatement = null;
 
+
     public satinAl() {
 
         add(panel9);
@@ -31,19 +32,22 @@ public class satinAl extends JFrame{
                 try {
                     con = DriverManager.getConnection(databaseUrl,"root","");
                     String sorgu0 = "SELECT koltuk_no FROM bilet_al WHERE koltuk_no = ?";
+
                     preparedStatement = con.prepareStatement(sorgu0);
                     preparedStatement.setString(1,koltuk);
 
-                    ResultSet rs = preparedStatement.executeQuery(sorgu0);
+                    ResultSet rs = preparedStatement.executeQuery();
 
                     if (rs.next()){
                         bilgiMesaji("Bu koltuk satın alınmış,başka seçin","Bilgi");
                     }
 
                     else{
-                        String sorgu1 = "INSERT INTO bilet_al (koltuk_no) VALUES  (?)";
+                        String sorgu1 = "INSERT INTO bilet_al (koltuk_no) VALUES (?)";
+
                         preparedStatement = con.prepareStatement(sorgu1);
                         preparedStatement.setString(1,koltuk);
+                        System.out.println("2. sorgu doğru");
 
                        int x = preparedStatement.executeUpdate();
 
@@ -61,17 +65,15 @@ public class satinAl extends JFrame{
                     throwables.printStackTrace();
                 }
 
-                String sorgu2 = "SELECT kullanici_bilgileri.ad, kullanici_bilgileri.soyad, terminal.otobus_no,terminal.otobus_adi,terminal.kalkis_noktasi,terminal.varis_noktasi,terminal.sefer_tarihi,terminal.sefer_saati,terminal.ucret FROM kullanici_bilgileri,terminal WHERE kullanici_bilgileri.id=terminal.id ORDER BY kullanici_bilgileri.id";
+                /*String sorgu2 = "SELECT kullanici_bilgileri.ad, kullanici_bilgileri.soyad, terminal.otobus_no,terminal.otobus_adi,terminal.kalkis_noktasi,terminal.varis_noktasi,terminal.sefer_tarihi,terminal.sefer_saati,terminal.ucret FROM kullanici_bilgileri,terminal WHERE kullanici_bilgileri.id=terminal.id ORDER BY kullanici_bilgileri.id";
                 try {
                     preparedStatement = con.prepareStatement(sorgu2);
                     ResultSet rs2 = preparedStatement.executeQuery();
                     while (rs2.next()){
-
-
                     }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
-                }
+                }*/
                 
             }
         });
