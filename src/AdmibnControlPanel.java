@@ -72,6 +72,7 @@ public class AdmibnControlPanel extends JFrame{
                     preparedStatement.executeUpdate();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
+                    bilgiMesaji("Herhangi bir sefer seçilmedi!","Hata");
                 }
             }
 

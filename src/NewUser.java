@@ -4,7 +4,9 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 
-public class NewUser extends  JFrame{
+public class NewUser extends JFrame {
+    private static Connection con = null;
+    private static PreparedStatement preparedStatement = null;
     private JPanel panel3;
     private JTextField isimField;
     private JTextField soyisimField;
@@ -14,14 +16,10 @@ public class NewUser extends  JFrame{
     private JTextField usernameField;
     private JTextField emailField;
 
-    private static Connection con = null;
-    private static PreparedStatement preparedStatement = null;
-
-
 
     public NewUser() {
         add(panel3);
-        setSize(800,500);
+        setSize(800, 500);
         setTitle("Otobüs Bilet Sistemi");
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -30,21 +28,20 @@ public class NewUser extends  JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
-            String isim = isimField.getText();
-            String soyisim = soyisimField.getText();
-            String username = usernameField.getText();
-            String parola = parolaField.getText();
-            String email = emailField.getText();
+                String isim = isimField.getText();
+                String soyisim = soyisimField.getText();
+                String username = usernameField.getText();
+                String parola = parolaField.getText();
+                String email = emailField.getText();
 
-            String databaseUrl = "jdbc:mysql://localhost:3306/bus?useUnicode=true&characterEncoding=utf-8";
-
+                String databaseUrl = "jdbc:mysql://localhost:3306/bus?useUnicode=true&characterEncoding=utf-8";
 
 
                 try {
-                    con = DriverManager.getConnection(databaseUrl,"root","");
+                    con = DriverManager.getConnection(databaseUrl, "root", "");
                     System.out.println("bağlantı başarılı");
 
-                    setPreparedStatement(isim,soyisim,username,parola,email);
+                    setPreparedStatement(isim, soyisim, username, parola, email);
 
                     // prapere statement kullandık bu uzun yola gerek kalmadı
                     /*String insertQuery = "INSERT INTO kullanici_bilgileri (ad,soyad,username,parola,email) VALUES (" + "'" +isim+ "'," + "'" +soyisim+"',"+ "'"+ username +"'," +"'"+parola+"',"+"'"+email+"')";
@@ -70,7 +67,8 @@ public class NewUser extends  JFrame{
             }
         });
     }
-    private void setPreparedStatement(String isim,String soyisim,String username,String parola,String email) throws SQLException {
+
+    private void setPreparedStatement(String isim, String soyisim, String username, String parola, String email) throws SQLException {
 
         String kontrolSorgu = "SELECT * FROM kullanici_bilgileri WHERE username= ? and parola = ? ";
         preparedStatement = con.prepareStatement(kontrolSorgu);
@@ -81,31 +79,28 @@ public class NewUser extends  JFrame{
 
         if (rs.next()) {
             bilgiMesaji("Bu kullanıcı zaten bulunuyor ", "Bilgi");
+        } else {
+            String sorgu = "INSERT INTO kullanici_bilgileri (ad,soyad,username,parola,email) VALUES (?,?,?,?,?)";
+
+            preparedStatement = con.prepareStatement(sorgu);
+            preparedStatement.setString(1, isim);
+            preparedStatement.setString(2, soyisim);
+            preparedStatement.setString(3, username);
+            preparedStatement.setString(4, parola);
+            preparedStatement.setString(5, email);
+            int x = preparedStatement.executeUpdate();
+
+            if (x == 1) {
+                bilgiMesaji("Kaydınız Yapıldı", "Bilgilerndirme");
+            } else {
+                bilgiMesaji("Kayıt başarısız", "Bilgilendirme ");
+            }
         }
 
-        else{
-        String sorgu = "INSERT INTO kullanici_bilgileri (ad,soyad,username,parola,email) VALUES (?,?,?,?,?)";
-
-        preparedStatement = con.prepareStatement(sorgu);
-        preparedStatement.setString(1, isim);
-        preparedStatement.setString(2, soyisim);
-        preparedStatement.setString(3, username);
-        preparedStatement.setString(4, parola);
-        preparedStatement.setString(5, email);
-        int x = preparedStatement.executeUpdate();
-
-        if (x == 1) {
-            bilgiMesaji("Kaydınız Yapıldı", "Bilgilerndirme");
-        }
-
-        else {
-            bilgiMesaji("Kayıt başarısız","Bilgilendirme ");
-        }
     }
 
-    }
-    public void bilgiMesaji(String mesaj,String baslik){
-        JOptionPane.showMessageDialog(null,mesaj,baslik,JOptionPane.INFORMATION_MESSAGE);
+    public void bilgiMesaji(String mesaj, String baslik) {
+        JOptionPane.showMessageDialog(null, mesaj, baslik, JOptionPane.INFORMATION_MESSAGE);
     }
 
 

@@ -1,25 +1,12 @@
-import com.toedter.calendar.JDateChooser;
 import net.proteanit.sql.DbUtils;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 
 public class UserControlPanel extends JFrame {
-    private JPanel panel5;
-    private JButton musteri_ekle;
-    private JButton seferAlButton;
-    private JTable table2;
-    private JTextField varis_Noktasi;
-    private JTextField kalkis_Noktasi;
-    private JButton biletSorgula;
-    private JTextField new_tarih;
-
-    private Connection con = null;
-    private PreparedStatement preparedStatement = null;
-
     public static String selected = "aaaa";
     public static String selected1 = "aaaa";
     public static String selected2 = "aaaa";
@@ -28,8 +15,16 @@ public class UserControlPanel extends JFrame {
     public static String selected5 = "aaaa";
     public static String selected6 = "aaaa";
     public static String selected7 = "aaaa";
+    private JPanel panel5;
 
-    JDateChooser tarih_user = new JDateChooser();
+    private JButton seferAlButton;
+    private JTable table2;
+    private JTextField varis_Noktasi;
+    private JTextField kalkis_Noktasi;
+    private JButton biletSorgula;
+    private JTextField new_tarih;
+    private Connection con = null;
+    private PreparedStatement preparedStatement = null;
 
 
     public UserControlPanel() {
@@ -39,7 +34,6 @@ public class UserControlPanel extends JFrame {
         setTitle("Otobüs Bilet Sistemi");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        //createTable();
 
         seferAlButton.addActionListener(new ActionListener() {
             @Override
@@ -65,12 +59,6 @@ public class UserControlPanel extends JFrame {
         biletSorgula.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                /*tarih_user.setDateFormatString("dd/MM/yyyy");
-                tarih_Paneli.add(tarih_user);
-
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                String dtc = sdf.format(tarih_user.getDate());*/
 
 
                 String kalkisnoktasi = kalkis_Noktasi.getText();
@@ -98,18 +86,4 @@ public class UserControlPanel extends JFrame {
         });
     }
 
-    /*public void createTable() {
-        String databaseUrl = "jdbc:mysql://localhost:3306/bus?useUnicode=true&characterEncoding=utf-8";
-        try {
-            con = DriverManager.getConnection(databaseUrl, "root", "");
-            String sorgu = "SELECT * FROM terminal";
-            preparedStatement = con.prepareStatement(sorgu);
-            ResultSet rs = preparedStatement.executeQuery();
-            table2.setModel(DbUtils.resultSetToTableModel(rs));
-
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }*/
 }

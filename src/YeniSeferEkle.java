@@ -1,5 +1,5 @@
-
 import com.toedter.calendar.JDateChooser;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +7,8 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 
 
-public class YeniSeferEkle extends JFrame{
+public class YeniSeferEkle extends JFrame {
+    JDateChooser tarih = new JDateChooser();
     private JButton kayit;
     private JPanel panel7;
     private JTextField kalkis_noktasi;
@@ -20,16 +21,13 @@ public class YeniSeferEkle extends JFrame{
     private Connection con = null;
     private PreparedStatement preparedStatement = null;
 
-
-    JDateChooser tarih = new JDateChooser();
-
     public YeniSeferEkle() {
 
         tarih.setDateFormatString("dd/MM/yyyy");
         tarihpaneli.add(tarih);
 
         add(panel7);
-        setSize(800,500);
+        setSize(800, 500);
         setTitle("Otobüs Bilet Sistemi");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -59,39 +57,38 @@ public class YeniSeferEkle extends JFrame{
 
                     if (rs.next()) {
                         bilgiMesaji("Bu kullanıcı zaten bulunuyor ", "Bilgi");
-                    }
-                    else {
-                    String sorgu = "INSERT INTO terminal (otobus_no,otobus_adi,kalkis_noktasi,varis_noktasi,sefer_tarihi,sefer_saati,ucret) VALUES (?,?,?,?,?,?,?)";
-
-                    preparedStatement = con.prepareStatement(sorgu);
-                    preparedStatement.setString(1, otobusNo);
-                    preparedStatement.setString(2, otobusAdi);
-                    preparedStatement.setString(3, kalkisNoktasi);
-                    preparedStatement.setString(4, varisNoktasi);
-                    preparedStatement.setString(5, dt);
-                    preparedStatement.setString(6, seferSaati);
-                    preparedStatement.setString(7, fiyat);
-
-                    int x = preparedStatement.executeUpdate();
-
-                    if (x == 1) {
-                        bilgiMesaji("Kaydınız Yapıldı", "Bilgilerndirme");
-
-
                     } else {
-                        bilgiMesaji("Kayıt başarısız", "Bilgilendirme ");
-                    }
-                }
+                        String sorgu = "INSERT INTO terminal (otobus_no,otobus_adi,kalkis_noktasi,varis_noktasi,sefer_tarihi,sefer_saati,ucret) VALUES (?,?,?,?,?,?,?)";
 
-                    } catch(SQLException throwables){
-                        throwables.printStackTrace();
+                        preparedStatement = con.prepareStatement(sorgu);
+                        preparedStatement.setString(1, otobusNo);
+                        preparedStatement.setString(2, otobusAdi);
+                        preparedStatement.setString(3, kalkisNoktasi);
+                        preparedStatement.setString(4, varisNoktasi);
+                        preparedStatement.setString(5, dt);
+                        preparedStatement.setString(6, seferSaati);
+                        preparedStatement.setString(7, fiyat);
+
+                        int x = preparedStatement.executeUpdate();
+
+                        if (x == 1) {
+                            bilgiMesaji("Kaydınız Yapıldı", "Bilgilerndirme");
+
+
+                        } else {
+                            bilgiMesaji("Kayıt başarısız", "Bilgilendirme ");
+                        }
                     }
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
                 }
+            }
 
         });
     }
 
-    public void bilgiMesaji(String mesaj,String baslik){
-        JOptionPane.showMessageDialog(null,mesaj,baslik,JOptionPane.INFORMATION_MESSAGE);
+    public void bilgiMesaji(String mesaj, String baslik) {
+        JOptionPane.showMessageDialog(null, mesaj, baslik, JOptionPane.INFORMATION_MESSAGE);
     }
 }
