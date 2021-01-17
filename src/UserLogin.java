@@ -54,21 +54,21 @@ public class UserLogin extends JFrame{
 
 
                 while (rs.next()) {
-                    System.out.println("hataaa1 ");
+
                     userid = rs.getString("username");
-                    System.out.println("hataaa2 ");
+                    
                     passid = rs.getString("parola");
                     System.out.println(userid);
                 }
                 b = userid;
 
                 if (userid.equals(username) && passid.equals(parola)) {
-                    System.out.println("ifin işçine girdim");
+
                     bilgiMesajı("Hoşgeldin " + userid + "", "Bilgi Mesajı");
                     dispose();
 
                     UserControlPanel ucp = new UserControlPanel();
-                    System.out.println(" buraya gelemedim");
+
                     ucp.setLocationRelativeTo(null);
                     ucp.setVisible(true);
 
@@ -76,17 +76,17 @@ public class UserLogin extends JFrame{
 
                 // çalışmıyor
                 else {
-                    System.out.println("buraya geldim ELSE");
+
                     bilgiMesajı("Giriş bilgileri yanlış yeni bir hesap açabilirsin", "Bilgi Mesajı");
                 }
-                System.out.println("buraya geldim else dışı");
+
             } catch (SQLException throwables) {
-                System.out.println("hata mq");
+
                 throwables.printStackTrace();
 
             }
 
-            System.out.println("catchden çıktım");
+
         }
     });
 
