@@ -86,6 +86,12 @@ public class AdmibnControlPanel extends JFrame{
                 ae.setVisible(true);
             }
         });
+        biletleriGörüntüleButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                createTable2();
+            }
+        });
     }
     public void createTable() {
         String databaseUrl = "jdbc:mysql://localhost:3306/bus?useUnicode=true&characterEncoding=utf-8";
@@ -93,6 +99,22 @@ public class AdmibnControlPanel extends JFrame{
             con = DriverManager.getConnection(databaseUrl,"root","");
             String sorgu = "SELECT * FROM terminal";
             preparedStatement = con.prepareStatement(sorgu);
+            ResultSet rs = preparedStatement.executeQuery();
+            table1.setModel(DbUtils.resultSetToTableModel(rs));
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+    public void createTable2() {
+        String databaseUrl = "jdbc:mysql://localhost:3306/bus?useUnicode=true&characterEncoding=utf-8";
+        try {
+            con = DriverManager.getConnection(databaseUrl,"root","");
+            String sorgu0 = "SELECT * FROM bilet_al";
+            preparedStatement = con.prepareStatement(sorgu0);
             ResultSet rs = preparedStatement.executeQuery();
             table1.setModel(DbUtils.resultSetToTableModel(rs));
 

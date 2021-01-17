@@ -15,6 +15,8 @@ public class UserLogin extends JFrame{
     private Connection con = null;
     private PreparedStatement preparedStatement = null;
 
+    public static String b = "null";
+
 
     public UserLogin() {
         add(panel1);
@@ -35,6 +37,8 @@ public class UserLogin extends JFrame{
                 String userid = "null";
                 String passid = "null";
 
+
+
                 con = DriverManager.getConnection(url, "root", "");
                 String sorgu = "Select username,parola from kullanici_bilgileri where `username` = ? and `parola` = ?";
 
@@ -48,6 +52,7 @@ public class UserLogin extends JFrame{
 
                 ResultSet rs = preparedStatement.executeQuery();
 
+
                 while (rs.next()) {
                     System.out.println("hataaa1 ");
                     userid = rs.getString("username");
@@ -55,6 +60,7 @@ public class UserLogin extends JFrame{
                     passid = rs.getString("parola");
                     System.out.println(userid);
                 }
+                b = userid;
 
                 if (userid.equals(username) && passid.equals(parola)) {
                     System.out.println("ifin işçine girdim");

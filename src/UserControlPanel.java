@@ -21,6 +21,13 @@ public class UserControlPanel extends JFrame {
     private PreparedStatement preparedStatement = null;
 
     public static String selected = "aaaa";
+    public static String selected1 = "aaaa";
+    public static String selected2 = "aaaa";
+    public static String selected3 = "aaaa";
+    public static String selected4 = "aaaa";
+    public static String selected5 = "aaaa";
+    public static String selected6 = "aaaa";
+    public static String selected7 = "aaaa";
 
     JDateChooser tarih_user = new JDateChooser();
 
@@ -41,13 +48,16 @@ public class UserControlPanel extends JFrame {
                 DefaultTableModel model = (DefaultTableModel) table2.getModel();
                 int rows = table2.getSelectedRow();
                 selected = model.getValueAt(rows, 0).toString();
+                selected1 = model.getValueAt(rows, 1).toString();
+                selected2 = model.getValueAt(rows, 2).toString();
+                selected3 = model.getValueAt(rows, 3).toString();
+                selected4 = model.getValueAt(rows, 4).toString();
+                selected5 = model.getValueAt(rows, 5).toString();
+                selected6 = model.getValueAt(rows, 6).toString();
+                selected7 = model.getValueAt(rows, 7).toString();
 
                 satinAl sa = new satinAl();
                 sa.setVisible(true);
-
-
-
-
             }
         });
 
